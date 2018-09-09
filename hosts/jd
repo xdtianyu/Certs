@@ -1,0 +1,2 @@
+DIRS=(cn)
+REMOTE_CMD="systemctl reload nginx || systemctl restart nginx"

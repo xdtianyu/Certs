@@ -1,0 +1,26 @@
+image: alpine
+
+before_script:
+  - apk update && apk add openssh-client bash curl wget openssl
+  - eval $(ssh-agent)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - bash s3.sh certs certs.tar.gz -d > certs.tar.gz
+    - tar xzf certs.tar.gz || true
+    - mv certs/accounts sites || true
+    - mv certs sites || true
+    - rm certs.tar.gz
+    - bash cert.sh
+    - bash deploy.sh 
+    - tar czf certs.tar.gz certs
+    - bash s3.sh certs certs.tar.gz
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - "certs"
