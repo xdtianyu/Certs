@@ -71,7 +71,6 @@ REMOTE_CMD="systemctl reload nginx || systemctl restart nginx"
 
 | 环境变量         | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ |
-| API_KEY          | cloudflare api key                                           |
 | CF_EMAIL         | cloudflare 登陆邮箱                                          |
 | CF_TOKEN         | cloudflare api token                                         |
 | KEYS_URL         | 外部 ssh 配置路径，用来获取 `.ssh/config` 和 `.ssh/known_hosts` 如 `https://keys.xdty.org` |
